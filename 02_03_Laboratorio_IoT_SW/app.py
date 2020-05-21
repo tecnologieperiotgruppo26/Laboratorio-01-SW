@@ -10,11 +10,13 @@ class Converter():
         input_dict = json.loads(str_json)
         output_dict = {
             "originalValues": input_dict["values"],
-            "convertedValues": []
+            "convertedValues": ""
         }
+        conv = []
         for num in output_dict["originalValues"]:
             value = self.convert(num, input_dict["originalUnit"], input_dict["targetUnit"])
-            output_dict["convertedValues"].append(value)
+            conv.append(value)
+        output_dict["convertedValues"] = conv
         return json.dumps(output_dict)
     
     def convert(self, num: float, originalUnit: str, targetUnit: str) -> float:
