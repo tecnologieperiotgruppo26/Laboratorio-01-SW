@@ -21,23 +21,24 @@ class Converter():
     
     def convert(self, num: float, originalUnit: str, targetUnit: str) -> float:
         finalValue = 0
-        if "originalUnit" == 'C':
-            if "targetUnit" == 'K':
+        if originalUnit == 'C':
+            if targetUnit == 'K':
                 finalValue = float(num) + 273.15
-            elif "targetUnit" == 'F':
+            elif targetUnit == 'F':
                 finalValue = (float(num)*9/5)+32
-        elif "originalUnit" == 'K':
-            if "targetUnit" == 'C':
+        elif originalUnit == 'K':
+            if targetUnit == 'C':
                 finalValue = float(num) - 273.15
-            elif "targetUnit" == 'F':
+            elif targetUnit == 'F':
                 finalValue = (float(num-273.15)*9/5)+32
-        elif "originalUnit" == 'F':
-            if "targetUnit" == 'C':
+        elif originalUnit == 'F':
+            if targetUnit == 'C':
                 finalValue = ((float(num) - 32) * 5 / 9)
-            elif "targetUnit" == 'K':
+            elif targetUnit == 'K':
                 #(5 °F - 32) × 5/9 + 273,15
                 finalValue = ((float(num) - 32) * 5 / 9) + 273.15
-        return finalValue
+
+        return round(finalValue, 2)
     
 if __name__ == '__main__':
     conf = {
