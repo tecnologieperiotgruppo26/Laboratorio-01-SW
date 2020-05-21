@@ -2,21 +2,22 @@ import cherrypy
 import json
 
 class Converter():
-    cherrypy.exposed = True
+    #cherrypy.\
+    exposed = True
     
     def PUT(self, *uri):
         str_json = cherrypy.request.body.read()
-        input_dict = json.load(str_json)
+        input_dict = json.loads(str_json)
         output_dict = {
-            "originalValues": input_dict["values"]
+            "originalValues": input_dict["values"],
             "convertedValues": []
         }
-        for num in output_dict["originalValue"]:
-            value = convert(num, input_dict["originalUnit"], input_dict["targetUnit"])
+        for num in output_dict["originalValues"]:
+            value = self.convert(num, input_dict["originalUnit"], input_dict["targetUnit"])
             output_dict["convertedValues"].append(value)
-        return json.dump(output_dict)
+        return json.dumps(output_dict)
     
-    def convert(num: float, originalUnit: str, targetUnit: str) -> float:
+    def convert(self, num: float, originalUnit: str, targetUnit: str) -> float:
         finalValue = 0
         if "originalUnit" == 'C':
             if "targetUnit" == 'K':
@@ -34,7 +35,7 @@ class Converter():
             elif "targetUnit" == 'K':
                 #(5 °F - 32) × 5/9 + 273,15
                 finalValue = ((float(num) - 32) * 5 / 9) + 273.15
-    return finalValue 
+        return finalValue
     
 if __name__ == '__main__':
     conf = {
@@ -43,7 +44,7 @@ if __name__ == '__main__':
             'tools.sessions.on': True,
         }
     }
-    cherrypy.tree.mount (Converter(), '/string', conf)
+    cherrypy.tree.mount (Converter(), '/', conf)
     cherrypy.config.update({'server.socket_port': 8080})
     
     cherrypy.engine.start()
