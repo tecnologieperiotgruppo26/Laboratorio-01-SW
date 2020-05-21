@@ -2,17 +2,24 @@ import os, os.path
 import random 
 import string 
 import cherrypy
+import json
 
 class StringGenerator(object): 
-  @cherrypy.expose
-
-  def index(self):
+  exposed = True
+    
+  def GET(self, *uri, **params):
     return open('./freeboard/index.html')
+
+  def POST(self, *uri):
+    body = json.loads(cherrypy.request.body.read())
+    print(body.get('json_string'))
+    print(cherrypy.request.body.read())
 
 if __name__ == '__main__': 
   conf = {
     '/': {
       'tools.sessions.on': True,
+      'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
       'tools.staticdir.root': os.path.abspath(os.getcwd()) 
     },
     '/freeboard': {
