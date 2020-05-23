@@ -6,6 +6,7 @@ class Converter():
     exposed = True
     
     def PUT(self, *uri):
+        # Lettura del body e decodifica da json a dizionario
         str_json = cherrypy.request.body.read()
         input_dict = json.loads(str_json)
         output_dict = {
@@ -13,6 +14,7 @@ class Converter():
             "convertedValues": ""
         }
         conv = []
+        # Ciclo sui valori da convertire
         for num in output_dict["originalValues"]:
             value = self.convert(num, input_dict["originalUnit"], input_dict["targetUnit"])
             conv.append(value)
