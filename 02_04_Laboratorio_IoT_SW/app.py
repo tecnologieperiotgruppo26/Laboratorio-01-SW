@@ -10,10 +10,11 @@ class StringGenerator(object):
   def GET(self, *uri, **params):
     return open('./freeboard/index.html')
 
-  def POST(self, *uri):
-    body = json.loads(cherrypy.request.body.read())
-    print(body.get('json_string'))
-    print(cherrypy.request.body.read())
+  def POST(self, *uri, **params):
+    if uri[0]=="saveDashboard":
+      with open('./freeboard/dashboard/dashboard.json', "w") as file:
+        print(f"{params['json_string']}")
+        file.write(params['json_string'])
 
 if __name__ == '__main__': 
   conf = {
