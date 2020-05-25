@@ -12,7 +12,7 @@ class StringGenerator(object):
 
   def POST(self, *uri, **params):
     if uri[0]=="saveDashboard":
-      with open('./freeboard/dashboard/dashboard.json', "w") as file:
+      with open('./freeboard/static/dashboard/dashboard.json', "w") as file:
         print(f"{params['json_string']}")
         file.write(params['json_string'])
 
