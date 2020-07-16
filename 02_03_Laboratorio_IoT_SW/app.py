@@ -2,7 +2,6 @@ import cherrypy
 import json
 
 class Converter():
-    #cherrypy.\
     exposed = True
     
     def PUT(self, *uri):
@@ -49,7 +48,7 @@ if __name__ == '__main__':
             'tools.sessions.on': True,
         }
     }
-    cherrypy.tree.mount (Converter(), '/', conf)
+    cherrypy.tree.mount(Converter(), '/', conf)
     cherrypy.config.update({'server.socket_port': 8080})
     
     cherrypy.engine.start()
