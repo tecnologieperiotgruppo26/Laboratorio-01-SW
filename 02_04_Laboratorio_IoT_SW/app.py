@@ -4,7 +4,7 @@ import string
 import cherrypy
 import json
 
-class StringGenerator(object): 
+class FreeBoard(object): 
   exposed = True
     
   def GET(self, *uri, **params):
@@ -32,6 +32,6 @@ if __name__ == '__main__':
       'tools.staticdir.dir': './freeboard/static'
     }
   }
-  cherrypy.tree.mount(StringGenerator(), '/', conf) 
+  cherrypy.tree.mount(FreeBoard(), '/', conf) 
   cherrypy.engine.start()
   cherrypy.engine.block()
