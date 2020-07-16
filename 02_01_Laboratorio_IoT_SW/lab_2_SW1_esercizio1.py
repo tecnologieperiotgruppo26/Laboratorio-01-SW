@@ -2,7 +2,6 @@ import cherrypy
 import json
 
 class WebServer(object):
-    #@cherrypy.expose
     exposed = True
 
     def GET(self, *uri, **params):
